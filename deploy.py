@@ -98,16 +98,16 @@ def main():
     if ok:
         print(f"  倉庫已存在：{OWNER}/{REPO}")
     else:
+        # 不帶 --source：某些 gh 版本在非 cwd 目錄下會誤報 not a git repository
         ok, out, err = gh([
             "repo", "create", f"{OWNER}/{REPO}", "--public",
             "--description", "經濟通關 · 市場與效率 · 繁體中文答題肉鴿（依據課堂筆記 Ch12／Ch13）",
-            "--source", ROOT, "--remote", "origin", "--push",
         ])
-        if not ok:
+        if not ok and "already exists" not in (err + out).lower():
             print("  建庫失敗：")
             print(err or out)
             return 1
-        print(f"  已建立並推送：{OWNER}/{REPO}")
+        print(f"  已建立：{OWNER}/{REPO}")
 
     print("== 4/5 推送 ==")
     ok, out, err = run([GIT, "remote", "get-url", "origin"], check=False)
