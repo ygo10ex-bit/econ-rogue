@@ -113,15 +113,21 @@ def main():
     ok, out, err = run([GIT, "remote", "get-url", "origin"], check=False)
     if not ok:
         run([GIT, "remote", "add", "origin", f"https://github.com/{OWNER}/{REPO}.git"])
-    # gh 當 credential helper，讓 push 能認證
-    gh(["auth", "setup-git"])
-    ok, out, err = run([GIT, "push", "-u", "origin", "main"], check=False)
+    # 這台機器 schannel 拿不到憑據、credential helper 也沒配；改用 gh token 臨時塞進 URL + openssl 後端。
+    # token 只出現在命令行，不寫進 .git/config。
+    tok_ok, tok, _ = gh(["auth", "token"])
+    if not tok_ok or not tok:
+        print("  拿不到 gh token，請先 gh auth login")
+        return 1
+    tok_url = f"https://x-access-token:{tok}@github.com/{OWNER}/{REPO}.git"
+    ok, out, err = run([GIT, "-c", "http.sslBackend=openssl", "push", tok_url, "main:main"], check=False)
     if ok:
-        print(out or "  已推送")
+        print("  已推送")
     else:
         print("  推送失敗：")
         print(err or out)
         return 1
+    run([GIT, "branch", "--set-upstream-to=origin/main", "main"], check=False)
 
     print("== 5/5 開啟 GitHub Pages ==")
     ok, out, err = gh(["api", f"repos/{OWNER}/{REPO}/pages"])
