@@ -362,7 +362,7 @@ function starTotal(){return Object.values(S.stars||{}).reduce((a,b)=>a+(b||0),0)
 function reportNow(){
   if(!S||typeof S!=='object')return;
   const payload={
-    id:ensurePid(), n:playName().slice(0,14), g:STAT_GAME,
+    id:ensurePid(), n:playName().slice(0,14), g:STAT_GAME, tc:CHS.length,
     lv:Object.keys(S.stars||{}).length, ch:maxChapter(), st:starTotal(),
     q:(S.tot&&S.tot.q)||0, c:(S.tot&&S.tot.c)||0,
     ms:Math.round(S.playMs||0), t:Date.now()
@@ -422,8 +422,8 @@ function viewStats(){
   return head+`<div class="panel"><div class="ptitle">概況</div>
     <div class="small">${STATS.length} 位玩家 · 合計答題 ${totalQ} 題 · 合計遊玩 ${fmtDur(totalMs)}</div></div>
   <div class="stlist">${STATS.map(x=>`<div class="strow${x.id===me?' me':''}">
-    <div class="stn">${esc(x.n||'無名玩家')}<span class="stg">${gameName(x.g)}</span>${x.id===me?'<span class="stme">你</span>':''}</div>
-    <div class="stm">${x.g==='econ'?'第 '+x.ch+' 章':'第 '+x.ch+' 章'}通關 · ${x.lv||0} 關 · ${x.st||0} 星</div>
+    <div class="stn">${esc(x.n||'無名玩家')}<span class="stg">${gameName(x.g)}, ${x.tc||(x.g==='econ'?2:9)} 章</span>${x.id===me?'<span class="stme">你</span>':''}</div>
+    <div class="stm">第 ${x.ch||0} 章通關 · ${x.lv||0} 關 · ${x.st||0} 星</div>
     <div class="stm2">答題 ${x.q||0} · 正確率 ${x.q?Math.round((x.c||0)/x.q*100):0}% · ${fmtDur(x.ms)}</div>
     <div class="std">${fmtAgo(x.t)}</div></div>`).join('')}</div>
   <div class="small" style="margin-top:14px">名字由玩家自己填，公開顯示。數據只保留 12 小時，之後會消失（這是原型，正式版會接真的後端）。</div>
