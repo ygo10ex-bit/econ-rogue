@@ -35,14 +35,35 @@ body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#16202e,#0d111
 .chap{margin:18px 0 8px;display:flex;justify-content:space-between;align-items:baseline}
 .chap h3{margin:0;font-size:16px}
 .chap .w{color:var(--dim);font-size:12px}
-.lv{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--line);
-  border-radius:11px;padding:12px 14px;margin:7px 0;cursor:pointer}
-.lv:hover{border-color:var(--acc)}
-.lv.lock{opacity:.38;cursor:not-allowed}
-.lv .nm{font-size:14px}
-.lv .st{color:var(--gold);letter-spacing:2px;font-size:13px}
-.lv .tg{color:var(--dim);font-size:11px;margin-left:6px}
-.boss{border:1px dashed #6e40c9;background:linear-gradient(180deg,#1b1630,#161b22)}
+/* ===== 玩家數據 ===== */
+.stlist{margin:14px 0 4px}
+.strow{padding:13px 10px;border-bottom:1px solid var(--line);position:relative;padding-right:78px}
+.strow.me{box-shadow:inset 2px 0 0 var(--acc);padding-left:14px}
+.stn{font-size:14.5px;font-weight:600}
+.stme{display:inline-block;font-size:10px;font-weight:800;color:#0d1117;background:var(--acc);
+  border-radius:4px;padding:1px 5px;margin-left:8px;vertical-align:2px}
+.stg{display:inline-block;font-size:10px;font-weight:700;color:#9a8fc4;background:#1c2430;
+  border:1px solid var(--line);border-radius:4px;padding:1px 6px;margin-left:8px;vertical-align:2px}
+.stm{font-size:12.5px;color:#b9c4d2;margin-top:4px}
+.stm2{font-size:11.5px;color:var(--dim);margin-top:2px}
+.std{position:absolute;right:10px;top:13px;font-size:11px;color:var(--dim)}
+.namein{width:100%;padding:12px 14px;font-size:16px;color:var(--text);
+  background:var(--panel2);border:1px solid var(--line);border-radius:10px;font-family:inherit;outline:none}
+.namein:focus{border-color:var(--acc)}
+/* 關卡列：不畫卡片，靠分隔線與間距分組 */
+.lv{display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+  background:none;border:0;border-bottom:1px solid var(--line);
+  padding:13px 6px;transition:background .12s,padding-left .12s}
+.lv:hover{background:rgba(88,166,255,.06);padding-left:17px}
+.lv.lock{opacity:.45;cursor:not-allowed}
+.lv.lock:hover{background:none;padding-left:6px}
+.lv.now{box-shadow:inset 2px 0 0 var(--acc);padding-left:15px}
+.lv .nm{font-size:14.5px;display:flex;align-items:center;gap:10px}
+.lv .st{color:#7d6c26;letter-spacing:2px;font-size:12px}
+.lv .st.on{color:var(--gold)}
+.lv .tg{color:var(--dim);font-size:11px;margin-left:2px}
+.lv.boss{border-top:1px solid var(--line);border-bottom:0;margin-top:3px}
+.lv.boss .nm{color:var(--pur)}
 .qcard{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
 .bbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--dim);flex-wrap:wrap;gap:6px}
 .hp{color:var(--bad);font-size:18px;letter-spacing:2px}
@@ -55,14 +76,20 @@ body{margin:0;background:radial-gradient(1200px 600px at 50% -10%,#16202e,#0d111
 .tmeta b{color:var(--text)}
 .qtag{font-size:11px;color:var(--dim);letter-spacing:1px;margin-bottom:8px}
 .qtext{font-size:17px;line-height:1.55;margin-bottom:16px}
-.opt{display:block;width:100%;text-align:left;background:var(--panel2);border:1px solid var(--line);color:var(--text);
-  border-radius:10px;padding:12px 14px;margin:8px 0;font-size:15px;cursor:pointer;line-height:1.45}
-.opt:hover:not(:disabled){border-color:var(--acc)}
-.opt .k{color:var(--dim);margin-right:8px;font-size:12px}
-.opt.correct{border-color:var(--ok);background:#12261a}
-.opt.wrong{border-color:var(--bad);background:#2a1416}
+/* 選項：不畫框，靠分隔線與間距分組 */
+.opt{display:block;width:100%;text-align:left;color:var(--text);cursor:pointer;line-height:1.55;
+  background:none;border:0;border-bottom:1px solid #2d3644;border-radius:0;
+  padding:13px 8px;margin:0;font-size:15px;transition:background .12s,padding-left .12s}
+.opt:last-of-type{border-bottom:0}
+.opt:hover:not(:disabled){background:rgba(88,166,255,.06);padding-left:16px}
+.opt .k{color:var(--acc);margin-right:12px;font-size:12px;font-weight:700}
+.opt.correct{background:rgba(63,185,80,.12);border-bottom-color:var(--ok);box-shadow:inset 2px 0 0 var(--ok)}
+.opt.wrong{background:rgba(248,81,73,.12);border-bottom-color:var(--bad);box-shadow:inset 2px 0 0 var(--bad)}
 .opt.elim{opacity:.3;text-decoration:line-through}
 .opt:disabled{cursor:default}
+/* 金幣標記 */
+.coin{display:inline-block;width:9px;height:9px;border-radius:50%;vertical-align:-1px;margin-right:4px;
+  background:radial-gradient(circle at 34% 30%,#ffeaa6,#d29922 52%,#8a5f00 100%)}
 .fb{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:14px;line-height:1.55}
 .fb.ok{background:#0f2417;border:1px solid #1f6f3a}
 .fb.no{background:#25110f;border:1px solid #6e2b25}
@@ -182,12 +209,16 @@ function loadCustom(){try{return JSON.parse(localStorage.getItem(CKEY)||'[]')}ca
 let BANK=BASE.concat(loadCustom());
 
 /* ================= 狀態 ================= */
-function fresh(){return {v:3,stars:{},boss:{},gold:4,items:[],wrong:{},glossary:{},combo:0,mockPass:0,best:0,seen:{},tot:{q:0,c:0}}}
+function fresh(){return {v:3,stars:{},boss:{},gold:4,items:[],wrong:{},glossary:{},combo:0,mockPass:0,best:0,seen:{},tot:{q:0,c:0},name:'',pid:'',playMs:0,nameAsked:false}}
 let S=fresh();
 try{const raw=localStorage.getItem(SKEY);if(raw){const o=JSON.parse(raw);if(o&&o.v===3)S=Object.assign(fresh(),o)}}catch(e){}
 // 清掉已刪除道具的殘留 id（如舊版錯題本），避免讀取不存在的道具時報錯
 S.items=(S.items||[]).filter(id=>ITEMS.some(i=>i.id===id));
 function save(){try{localStorage.setItem(SKEY,JSON.stringify(S))}catch(e){}}
+if(S.name===undefined)S.name='';
+if(S.pid===undefined)S.pid='';
+if(S.playMs===undefined)S.playMs=0;
+if(S.nameAsked===undefined)S.nameAsked=false;
 
 const L=(id)=>LEVELS.find(x=>x.id===id);
 const levelsOf=(ch)=>LEVELS.filter(x=>x.ch===ch);
@@ -300,8 +331,8 @@ function lookup(){
 /* ================= 視圖 ================= */
 function render(){
   const map={menu:viewMenu,map:viewMap,intro:viewIntro,battle:viewBattle,fail:viewFail,reward:viewReward,
-    shop:viewShop,mock:viewMock,mockresult:viewMockResult,review:viewReview,cards:viewCards,import:viewImport};
-  $().innerHTML=(map[screen]||viewMenu)();
+    shop:viewShop,mock:viewMock,mockresult:viewMockResult,review:viewReview,cards:viewCards,import:viewImport,stats:viewStats};
+  $().innerHTML=(map[screen]||viewMenu)()+((!S.nameAsked&&screen==='menu')?nameModal():'');
   if(B&&B.deadline&&(screen==='battle'||screen==='mock'))startTimer();
 }
 function startTimer(){
@@ -311,6 +342,113 @@ function startTimer(){
     const left=B.deadline-Date.now();el.textContent=fmt(left);
     if(left<=0){clearInterval(timer);if(B.mode==='mock')mockSubmit();else{B.hp=0;finishBattle()}}
   },500);
+}
+
+
+/* ================= 玩家數據（免註冊原型：ntfy.sh 當臨時存儲） =================
+   跟 CISSP 版共用同一個通道，靠 g 欄位區分遊戲；統計頁兩邊的數據會並排出現。
+   ntfy 免費版訊息保留 12 小時。 */
+const STAT_TOPIC='study-rogue-k7m2x9q4';
+const STAT_API='https://ntfy.sh/'+STAT_TOPIC;
+const STAT_GAME='econ';
+const STAT_KEEP_MS=12*3600*1000;
+
+let STATS=null, STAT_ERR='';
+function ensurePid(){if(!S.pid)S.pid='p'+Math.random().toString(36).slice(2,9);return S.pid}
+function playName(){return (S.name||'').trim()||'無名玩家'}
+function maxChapter(){return Object.keys(S.boss||{}).length}
+function starTotal(){return Object.values(S.stars||{}).reduce((a,b)=>a+(b||0),0)}
+
+function reportNow(){
+  if(!S||typeof S!=='object')return;
+  const payload={
+    id:ensurePid(), n:playName().slice(0,14), g:STAT_GAME,
+    lv:Object.keys(S.stars||{}).length, ch:maxChapter(), st:starTotal(),
+    q:(S.tot&&S.tot.q)||0, c:(S.tot&&S.tot.c)||0,
+    ms:Math.round(S.playMs||0), t:Date.now()
+  };
+  try{fetch(STAT_API,{method:'POST',body:JSON.stringify(payload),keepalive:true}).catch(()=>{})}catch(e){}
+}
+
+function loadStats(){
+  STATS='loading';STAT_ERR='';render();
+  fetch(STAT_API+'/json?poll=1&since=all')
+    .then(r=>r.text())
+    .then(txt=>{
+      const by={};
+      txt.split('\n').forEach(line=>{
+        line=line.trim();if(!line)return;
+        let m;try{m=JSON.parse(line)}catch(e){return}
+        if(!m||m.event!=='message'||!m.message)return;
+        let d;try{d=JSON.parse(m.message)}catch(e){return}
+        if(!d||!d.id||!d.t)return;
+        if(!by[d.id]||d.t>by[d.id].t)by[d.id]=d;
+      });
+      const now=Date.now();
+      STATS=Object.values(by).filter(x=>now-x.t<STAT_KEEP_MS).sort((a,b)=>b.t-a.t);
+      render();
+    })
+    .catch(e=>{STAT_ERR=String((e&&e.message)||e);STATS=[];render()});
+}
+
+function fmtDur(ms){
+  const m=Math.floor((ms||0)/60000);
+  if(m<60)return m+' 分';
+  return Math.floor(m/60)+' 小時 '+(m%60)+' 分';
+}
+function fmtAgo(t){
+  const s=Math.floor((Date.now()-t)/1000);
+  if(s<60)return '剛剛';
+  if(s<3600)return Math.floor(s/60)+' 分鐘前';
+  if(s<86400)return Math.floor(s/3600)+' 小時前';
+  return Math.floor(s/86400)+' 天前';
+}
+function gameName(g){return g==='econ'?'經濟':'CISSP'}
+
+function viewStats(){
+  const head=`<div class="hdr"><div class="logo" style="font-size:22px">玩家數據</div>
+    <div class="tagline">兩款遊戲共用一個榜 · 最近 12 小時</div></div>`;
+  const back=`<button class="btn small ghost" data-act="menu">← 返回</button>`;
+  if(STATS==='loading')return head+`<div class="panel center small">讀取中…</div><div class="row">${back}</div>`;
+  if(STATS===null)return head+`<div class="panel center small">還沒開始讀取。</div>
+    <div class="row"><button class="btn small" data-act="stats-load">開始讀取</button>${back}</div>`;
+  if(STAT_ERR)return head+`<div class="panel center small">讀取失敗：${esc(STAT_ERR)}</div>
+    <div class="row"><button class="btn small" data-act="stats-load">再試一次</button>${back}</div>`;
+  if(!STATS.length)return head+`<div class="panel center small">這 12 小時內還沒有人玩。</div>
+    <div class="row"><button class="btn small" data-act="stats-load">重新整理</button>${back}</div>`;
+  const me=ensurePid();
+  const totalQ=STATS.reduce((a,x)=>a+(x.q||0),0);
+  const totalMs=STATS.reduce((a,x)=>a+(x.ms||0),0);
+  return head+`<div class="panel"><div class="ptitle">概況</div>
+    <div class="small">${STATS.length} 位玩家 · 合計答題 ${totalQ} 題 · 合計遊玩 ${fmtDur(totalMs)}</div></div>
+  <div class="stlist">${STATS.map(x=>`<div class="strow${x.id===me?' me':''}">
+    <div class="stn">${esc(x.n||'無名玩家')}<span class="stg">${gameName(x.g)}</span>${x.id===me?'<span class="stme">你</span>':''}</div>
+    <div class="stm">${x.g==='econ'?'第 '+x.ch+' 章':'第 '+x.ch+' 章'}通關 · ${x.lv||0} 關 · ${x.st||0} 星</div>
+    <div class="stm2">答題 ${x.q||0} · 正確率 ${x.q?Math.round((x.c||0)/x.q*100):0}% · ${fmtDur(x.ms)}</div>
+    <div class="std">${fmtAgo(x.t)}</div></div>`).join('')}</div>
+  <div class="small" style="margin-top:14px">名字由玩家自己填，公開顯示。數據只保留 12 小時，之後會消失（這是原型，正式版會接真的後端）。</div>
+  <div class="row"><button class="btn small" data-act="stats-report">重新上報我的進度</button>
+    <button class="btn small ghost" data-act="stats-load">重新整理</button>${back}</div>`;
+}
+
+function nameModal(){
+  return `<div class="modal"><div class="mbox">
+    <div class="mt">你叫什麼？</div>
+    <div class="small" style="margin-bottom:12px">會公開顯示在「玩家數據」頁，隨便填就好，也可以跳過。</div>
+    <input id="namein" class="namein" maxlength="14" placeholder="無名玩家">
+    <div class="row" style="margin-top:12px">
+      <button class="btn small primary" data-act="name-save">就用這個</button>
+      <button class="btn small ghost" data-act="name-skip">跳過</button>
+    </div></div></div>`;
+}
+
+function nextStop(){
+  for(const c of CHS){
+    if(c.n>2||S.boss[c.n])continue;
+    for(const l of levelsOf(c.n))if(!starsOf(l.id))return {type:'level',id:l.id,ch:c.n};
+    if(bossUnlocked(c.n))return {type:'boss',ch:c.n};
+  }
+  return null;
 }
 
 function viewMenu(){
@@ -328,6 +466,7 @@ function viewMenu(){
    <button class="btn" data-act="mock">模擬考試</button>
    <button class="btn" data-act="cards">必背速查</button>
    <button class="btn" data-act="review">錯題本（${wrongCount()}）</button>
+   <button class="btn" data-act="stats">玩家數據</button>
    <button class="btn ghost" data-act="import">導入題庫</button>
    <button class="btn ghost danger" data-act="reset">重置進度</button>
   </div>
@@ -338,22 +477,24 @@ function viewMap(){
   let h=`<div class="hdr"><div class="logo">闖關地圖</div>
   <div class="tagline">金幣 ${S.gold} · 道具 ${S.items.length}/${SLOTS} · 每關 6 題</div></div>
   <div class="items">${itemChips(false)}</div>`;
+  const ns=nextStop();
+  const nowId=(ns&&ns.type==='level')?ns.id:null;
   for(const c of CHS){
     const un=chUnlocked(c.n);const done=!!S.boss[c.n];
-    h+=`<div class="chap"><h3>${c.name}</h3><div class="w">${c.weight>0?c.weight+'%':'額外'}${done?' · 已通關':''}</div></div>`;
+    h+=`<div class="chap"><h3>${c.name}</h3><div class="w">${c.weight>0?'內容佔比 '+c.weight+'%':'額外'}${done?' · 已通關':''}</div></div>`;
     for(const l of levelsOf(c.n)){
       const st=starsOf(l.id);const ok=lvUnlocked(l.id);
-      h+=`<div class="lv ${ok?'':'lock'}" data-act="${ok?'intro':''}" data-id="${l.id}">
-        <div class="nm">${ok?'':'🔒 '}${l.name}<span class="tg">目標 ${l.target}</span></div>
-        <div class="st">${st?('★'.repeat(st)+'☆'.repeat(3-st)):'☆☆☆'}</div></div>`;
+      h+=`<div class="lv ${ok?'':'lock'} ${l.id===nowId?'now':''}" data-act="${ok?'intro':''}" data-id="${l.id}">
+        <div class="nm">${l.name}<span class="tg">目標 ${l.target}</span></div>
+        <div class="st ${st?'on':''}">${'★'.repeat(st)+'☆'.repeat(3-st)}</div></div>`;
     }
     if(un){
       const bo=bossUnlocked(c.n);
       h+=`<div class="lv boss ${bo?'':'lock'}" data-act="${bo?'boss':''}" data-ch="${c.n}">
-        <div class="nm">${bo?`⚔️ 章末 Boss（20 題 · 15 分鐘 · 目標 ${c.bossTarget}）`:'🔒 章末 Boss（先清完本章關卡）'}</div>
-        <div class="st">${done?'已擊敗':'未挑戰'}</div></div>`;
+        <div class="nm">${bo?`章末 Boss　20 題 · 15 分鐘 · 目標 ${c.bossTarget}`:'章末 Boss（先清完本章關卡）'}</div>
+        <div class="st ${done?'on':''}">${done?'已擊敗':'未挑戰'}</div></div>`;
     }else{
-      h+=`<div class="lv lock"><div class="nm">🔒 完成上一章 Boss 後解鎖</div><div class="st"></div></div>`;
+      h+=`<div class="lv lock"><div class="nm">完成上一章 Boss 後解鎖</div><div class="st"></div></div>`;
     }
   }
   h+=`<div class="row"><button class="btn small ghost" data-act="menu">← 返回主菜單</button></div>`;
@@ -381,9 +522,9 @@ function viewBattle(){
   const pct=B.target?Math.min(100,Math.round(B.score/B.target*100)):0;
   return `<div class="bbar">
     <div class="hp">${isReview?'錯題重練':('♥'.repeat(Math.max(0,B.hp))+'♡'.repeat(Math.max(0,B.maxhp-B.hp)))}</div>
-    <div>${B.mode==='boss'?'⚔️ Boss · ':''}第 ${B.i+1}/${B.qs.length} 題</div>
+    <div>${B.mode==='boss'?'Boss · ':''}第 ${B.i+1}/${B.qs.length} 題</div>
     <div>${B.deadline?`<span class="timer" id="timer">--:--</span>`:''}</div>
-    <div><span class="gold">💰${S.gold}</span>　連擊 ${B.combo}</div>
+    <div><span class="gold"><span class="coin"></span>${S.gold}</span>　連擊 ${B.combo}</div>
   </div>
   ${isReview?'':`<div class="tbar"><div class="tfill" style="width:${pct}%"></div></div>
   <div class="tmeta"><span>得分 <b>${B.score}</b></span><span>目標 <b>${B.target}</b></span></div>`}
@@ -404,7 +545,7 @@ function viewBattle(){
      ${B.hints>0?`<button class="btn small" data-act="hint">提示（剩 ${B.hints}）</button>`:''}
      ${B.skips>0?`<button class="btn small" data-act="skipq">跳過（剩 ${B.skips}）</button>`:''}
      <button class="btn small ghost" data-act="flee">放棄本關</button></div>`}
-  <button class="dictbtn" data-act="dict">查詞<br><span class="gold">💰${dictPrice()}</span></button>
+  <button class="dictbtn" data-act="dict">查詞<br><span class="gold"><span class="coin"></span>${dictPrice()}</span></button>
   ${B.dictOpen?`<div class="modal"><div class="mbox"><div class="mt">縮寫解釋（本關第 ${B.dictUses} 次查詞）</div>
     ${B.dictTerms.map(t=>`<div class="mrow"><b>${t}</b><span>${esc(DICT[t])}</span></div>`).join('')}
     <div class="small" style="margin-top:8px">已加入生詞本，可在「必背速查」裡複習。</div>
@@ -426,7 +567,7 @@ function viewFail(){
 function viewReward(){
   const p=S.pending;
   return `<div class="hdr"><div class="logo" style="font-size:22px">關卡通過</div>
-   <div class="tagline">得分 ${B.score} / 目標 ${B.target}　獲得 💰${p.goldGain}　選一件道具帶走</div>
+   <div class="tagline">得分 ${B.score} / 目標 ${B.target}　獲得 <span class="coin"></span>${p.goldGain}　選一件道具帶走</div>
    ${B.dictThis&&B.dictThis.length?`<div class="small">本關查過：${B.dictThis.join('、')}</div>`:''}</div>
   <div class="items">${itemChips(true)}</div>
   ${S.items.length>=SLOTS?'<div class="card center small">道具欄已滿（5/5）。先賣掉一個，或者跳過拿金幣。</div>':''}
@@ -444,16 +585,16 @@ function viewShop(){
   const sh=S.shop;const disc=shopDisc();
   const price=(it)=>Math.max(1,Math.round(it.price*(1-disc)));
   return `<div class="hdr"><div class="logo" style="font-size:22px">商店</div>
-   <div class="tagline">💰${S.gold} · 道具 ${S.items.length}/${SLOTS}${disc?` · 補習優惠 −${Math.round(disc*100)}%`:''}</div></div>
+   <div class="tagline"><span class="coin"></span>${S.gold} · 道具 ${S.items.length}/${SLOTS}${disc?` · 補習優惠 −${Math.round(disc*100)}%`:''}</div></div>
   <div class="offers">
    ${sh.offers.map((id,k)=>{const it=ITEMS.find(i=>i.id===id);const p=price(it);const full=S.items.length>=SLOTS;
      return `<div class="offer ${it.rarity}"><div class="rname">${it.name}<span class="rar">${it.rarity==='C'?'普通':it.rarity==='U'?'稀有':'傳說'}</span></div>
      <div class="rdesc">${esc(it.desc)}</div>
-     <div class="price">💰${p}</div>
+     <div class="price"><span class="coin"></span>${p}</div>
      <button class="btn small ${S.gold>=p&&!full?'primary':''}" data-act="buy" data-k="${k}" ${S.gold<p||full?'disabled':''}>${full?'欄位已滿':'購買'}</button></div>`}).join('')||'<div class="small">商店空了。</div>'}
   </div>
   <div class="row">
-   <button class="btn small" data-act="reroll">刷新商店（💰${sh.rerollCost}）</button>
+   <button class="btn small" data-act="reroll">刷新商店（<span class="coin"></span>${sh.rerollCost}）</button>
    <button class="btn small ghost" data-act="leave">離開商店</button>
   </div>
   <div class="card"><h4>道具欄 ${S.items.length}/${SLOTS}</h4>
@@ -614,6 +755,7 @@ function finishBattle(){
   }
   save();
   S.pending={offers:rollOffers(3+(owned().some(x=>x.rewardExtra)?1:0)),goldGain};
+  reportNow();   // 過關就把進度報出去
   screen='reward';render();
 }
 function openShop(){
@@ -688,6 +830,15 @@ document.addEventListener('click',e=>{
   const el=e.target.closest('[data-act]');if(!el)return;
   const act=el.dataset.act;
   if(act==='map'){screen='map';render()}
+  else if(act==='stats'){STATS=null;screen='stats';loadStats()}
+  else if(act==='stats-load'){loadStats()}
+  else if(act==='stats-report'){reportNow();alert('已把你的進度送上去了。統計頁要重新整理才看得到。')}
+  else if(act==='name-save'){
+    const ni=document.getElementById('namein');
+    S.name=((ni&&ni.value)||'').trim().slice(0,14);
+    S.nameAsked=true;ensurePid();save();reportNow();render();
+  }
+  else if(act==='name-skip'){S.nameAsked=true;save();render()}
   else if(act==='menu'){screen='menu';render()}
   else if(act==='cards'){screen='cards';render()}
   else if(act==='review'){screen='review';render()}
@@ -735,6 +886,13 @@ document.addEventListener('keydown',e=>{
   }else if(screen==='mock'&&/^[1-4]$/.test(e.key)){mockAns(+e.key-1)}
 });
 render();
+
+/* 遊玩時長：每 15 秒記一次，頁面隱藏不計 */
+setInterval(()=>{ if(!document.hidden) S.playMs=(S.playMs||0)+15000; },15000);
+/* 每 3 分鐘自動上報一次進度 */
+setInterval(()=>{ if(!document.hidden) reportNow(); },180000);
+document.addEventListener('visibilitychange',()=>{ if(document.hidden){save();reportNow();} });
+setTimeout(reportNow,3000);
 </script>
 </body>
 </html>
