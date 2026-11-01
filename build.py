@@ -6,15 +6,21 @@
 輸入：
     econ-rogue/src/structure.json   章節與關卡配置
     econ-rogue/src/ch*.json          題庫（多個文件合併成一個池子）
-    econ-rogue/src/template.html     遊戲本體（含兩個 JSON 佔位符）
+    econ-rogue/src/template.html     遊戲本體（與 CISSP 版同一套 UI）
 
 輸出：
     econ-rogue/經濟通關.html         本地打開用
     econ-rogue/index.html            部署到 GitHub Pages 用（倉庫根目錄）
+
+說明：
+    模板沿用 CISSP 版的完整 UI（道具、進化鏈、聯動、圖鑑、玩家數據）。
+    經濟版沒有辨析手冊／中文詞典／陷阱標籤／過關對話這些學科內容，
+    對應的佔位符注入空資料，入口會自動隱藏。
 """
 import glob
 import json
 import os
+import re
 import sys
 
 try:
@@ -58,7 +64,6 @@ def main():
         assert str(q["ch"]) == q["level"].split("-")[0], f'{q["id"]}: ch 與 level 前綴不一致'
         assert q.get("q") and q.get("exp"), f'{q["id"]}: 缺 q 或 exp'
 
-    # 每關題量檢查：抽 6 題，池子太小會一直重複
     for lid in sorted(level_ids):
         n = sum(1 for q in bank if q["level"] == lid)
         flag = "" if n >= 12 else "  ⚠ 題量偏少"
@@ -69,10 +74,20 @@ def main():
 
     body = json.dumps(bank, ensure_ascii=False, separators=(",", ":"))
     struct_body = json.dumps(structure, ensure_ascii=False, separators=(",", ":"))
+
     with open(os.path.join(SRC, "template.html"), encoding="utf-8") as fh:
         tpl = fh.read()
-    assert "__BANK_JSON__" in tpl and "__STRUCTURE_JSON__" in tpl, "模板缺佔位符"
-    html = tpl.replace("__STRUCTURE_JSON__", struct_body).replace("__BANK_JSON__", body)
+    for ph in ("__BANK_JSON__", "__STRUCTURE_JSON__", "__DIFF_JSON__",
+               "__CDICT_JSON__", "__TRAPS_JSON__", "__TALK_JSON__"):
+        assert ph in tpl, "模板缺佔位符：" + ph
+
+    html = (tpl
+            .replace("__STRUCTURE_JSON__", struct_body)
+            .replace("__BANK_JSON__", body)
+            .replace("__DIFF_JSON__", "[]")     # 經濟版沒有辨析手冊
+            .replace("__CDICT_JSON__", "{}")    # 沒有中文概念詞典
+            .replace("__TRAPS_JSON__", "{}")    # 沒有陷阱標籤
+            .replace("__TALK_JSON__", "{}"))    # 沒有過關對話
 
     for path in (OUT, DIST):
         with open(path, "w", encoding="utf-8", newline="\n") as fh:
